@@ -45,7 +45,6 @@ class CompetitionType
      */
     private $team;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="CompetitionType", inversedBy="competitionType")
      * @ORM\JoinColumn(name="id_categorie", referencedColumnName="id")
