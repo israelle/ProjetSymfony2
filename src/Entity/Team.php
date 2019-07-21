@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ApiResource()
@@ -29,16 +30,23 @@ class Team
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Member", inversedBy="team")
-     * @ORM\JoinColumn(name="id_membre", referencedColumnName="id")
-     */
-    private $members;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Mach", inversedBy="")
+     * @ORM\ManyToOne(targetEntity="Match", inversedBy="team")
      * @ORM\JoinColumn(name="id_match", referencedColumnName="id")
      */
     private $match;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="point", type="integer")
+     */
+    private $point;
+
+    /**
+     * @var /DateTime
+     * @ORM\Column(name="date_creation", type="date")
+     */
+    private $dateCreate;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tournament")
@@ -47,11 +55,16 @@ class Team
     private $tournament;
 
     /**
-     * @var /DateTime
-     * @ORM\Column(name="date_creation", type="date")
+     * @ORM\OneToMany(targetEntity="Member", mappedBy="team")
+     * @ORM\JoinColumn(name="id_membre", referencedColumnName="id")
      */
-    private $dateCreate;
+    private $members;
 
+
+    public function __construct()
+    {
+        $this->members = new ArrayCollection();
+    }
     /**
      * @return int
      */
@@ -130,6 +143,22 @@ class Team
     public function setMatch($match): void
     {
         $this->match = $match;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPoint(): int
+    {
+        return $this->point;
+    }
+
+    /**
+     * @param int $point
+     */
+    public function setPoint(int $point): void
+    {
+        $this->point = $point;
     }
 
     /**

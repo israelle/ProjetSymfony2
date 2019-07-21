@@ -27,19 +27,29 @@ class Tournament
      */
     private $name;
 
+    /**
+     * @var /DateTime
+     * @ORM\Column(name="date_debut", type="date")
+     */
+    private $startDate;
+
+    /**
+     * @var /DateTime
+     * @ORM\Column(name="date_fin", type="date", )
+     */
+    private $endDate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CompetitionType", inversedBy="tournament")
+     * @ORM\JoinColumn(name="id_type_competition", referencedColumnName="id")
+     */
+    private $competitionType;
 
     /**
      * @ORM\OneToMany(targetEntity="Member", mappedBy="tournoi")
      * @ORM\JoinColumn(name="id_membre", referencedColumnName="id")
      */
     private $members;
-
-    /**
-     * @var array
-     * @ORM\ManyToOne(targetEntity="Team")
-     * @ORM\JoinColumn(name="id_equipe", referencedColumnName="id")
-     */
-    private $teams;
 
     /**
      * @return int
@@ -105,10 +115,52 @@ class Tournament
         $this->teams = $teams;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
 
+    /**
+     * @param mixed $startDate
+     */
+    public function setStartDate($startDate): void
+    {
+        $this->startDate = $startDate;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
 
+    /**
+     * @param mixed $endDate
+     */
+    public function setEndDate($endDate): void
+    {
+        $this->endDate = $endDate;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getCompetitionType()
+    {
+        return $this->competitionType;
+    }
 
+    /**
+     * @param mixed $competitionType
+     */
+    public function setCompetitionType($competitionType): void
+    {
+        $this->competitionType = $competitionType;
+    }
 
 }

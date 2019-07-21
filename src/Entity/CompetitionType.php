@@ -8,12 +8,12 @@ use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * @ApiResource()
  * @ORM\Table(name="Type_Competition")
+ * @ORM\Entity(repositoryClass="App\Repository\CompetitionTypeRepository")
  */
 class CompetitionType
 {
     /**
      * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -27,29 +27,10 @@ class CompetitionType
     private $name;
 
     /**
-     * @var /DateTime
-     * @ORM\Column(name="date_debut", type="date")
+     * @ORM\OneToMany(targetEntity="Tournament", mappedBy="competitionType")
+     * @ORM\JoinColumn(name="id_tournoi", referencedColumnName="id")
      */
-    private $startDate;
-
-    /**
-     * @var /DateTime
-     * @ORM\Column(name="date_fin", type="date", )
-     */
-    private $endDate;
-
-    /**
-     * @var array
-     * @ORM\ManyToOne(targetEntity="Team")
-     * @ORM\JoinColumn(name="id_equipe", referencedColumnName="id")
-     */
-    private $team;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="CompetitionType", inversedBy="competitionType")
-     * @ORM\JoinColumn(name="id_categorie", referencedColumnName="id")
-     */
-    private $competitionType;
+    private $tournament;
 
     /**
      * @return int
@@ -134,16 +115,17 @@ class CompetitionType
     /**
      * @return mixed
      */
-    public function getCompetitionType()
+    public function getTourament()
     {
-        return $this->competitionType;
+        return $this->tournament;
     }
 
     /**
-     * @param mixed $competitionType
+     * @param mixed $tourament
      */
-    public function setCompetitionType($competitionType): void
+    public function setTourament($tournament): void
     {
-        $this->competitionType = $competitionType;
+        $this->tournament = $tournament;
     }
+
 }

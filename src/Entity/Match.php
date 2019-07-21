@@ -54,6 +54,12 @@ class Match
     private $time;
 
     /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="match" )
+     */
+    private $team;
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -133,8 +139,20 @@ class Match
         $this->time = $time;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
 
-
-
+    /**
+     * @param mixed $team
+     */
+    public function setTeam($team): void
+    {
+        $this->team = $team;
+    }
 
 }

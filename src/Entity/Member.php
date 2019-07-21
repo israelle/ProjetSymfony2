@@ -54,7 +54,8 @@ class Member
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Team", mappedBy="members" )
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="members" )
+     * @ORM\JoinColumn(name="id_equipe", referencedColumnName="id")
      */
     private $team;
 
