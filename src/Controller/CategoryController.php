@@ -9,12 +9,14 @@ class CategoryController extends AbstractController
 {
 
     /**
-     * @Route("/category")
+     * @Route("/menu")
      */
     public function index()
     {
 
-        return $this->render('category/category.html.twig');
+        $title = 'Projet Symfony';
+        return $this->render('menu/index.html.twig',
+        ['title' => $title]);
     }
 
 }
